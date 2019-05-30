@@ -22,3 +22,5 @@ Route::post('/ajaxRequest', 'HomeController@ajaxRequestPost');
 Route::post('addTask', 'HomeController@addTaskPost');
 Route::post('getUsers', 'HomeController@getUsersPost');
 Route::post('saveUser', 'HomeController@saveUserPost');
+Route::get('admin', 'AdminController@index')->name('admin');
+Route::get('adminLogin', 'AdminController@adminLogin')->name('adminLogin');
