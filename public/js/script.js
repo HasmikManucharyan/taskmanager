@@ -25,9 +25,13 @@ $( document ).ready(function() {
            url:'/getUsers',
            success:function(data){
             var txt = '';
+            if(data.length != 0){
               for(i=0;i<data.length;i++) {
                 txt += '<option value="'+data[i]['id']+'">'+data[i]['name']+'</option>';
               }
+            } else {
+              txt = '<option>There are not registered users</option>';
+            }
               $('#selectedUser').html(txt);
            }
       });

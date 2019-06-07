@@ -89,7 +89,7 @@
                                 @endforeach
                         </tbody>
                         @else
-                            There is not registered users.
+                            There are not registered users.
                         @endif
                     </table>
                 </div>
