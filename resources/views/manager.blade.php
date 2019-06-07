@@ -92,8 +92,8 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
             <button type="button" class="btn btn-primary" id="addTask"  data-toggle="modal" data-target="#addtaskModal">Add Task</button>
+        <div class="row justify-content-center">
             <div class="modal fade" id="addtaskModal" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog">
                   <div class="modal-content">

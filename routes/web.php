@@ -18,9 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/home', 'HomeController@index')->name('home');
+Route::get('admin', 'Auth\AdminLoginController@showLoginForm');
 Route::post('/ajaxRequest', 'HomeController@ajaxRequestPost');
+Route::post('changeUserType', 'Auth\AdminLoginController@changeUserTypePost');
 Route::post('addTask', 'HomeController@addTaskPost');
 Route::post('getUsers', 'HomeController@getUsersPost');
 Route::post('saveUser', 'HomeController@saveUserPost');
-Route::get('admin', 'AdminController@index')->name('admin');
-Route::get('adminLogin', 'AdminController@adminLogin')->name('adminLogin');
+Route::post('admin', ['as'=>'admin','uses'=>'Auth\AdminLoginController@login']);

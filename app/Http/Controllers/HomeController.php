@@ -47,7 +47,6 @@ class HomeController extends Controller
             ->select('tasks.*')
             ->where('tasks.assigned_by', '=', $user_id)
             ->get();
-
         return view('manager',['data'=>$data]);
     }
 
@@ -76,14 +75,16 @@ class HomeController extends Controller
         return $users;
     }
 
-    public function saveUserPost(Request $request) { 
-        $data = $request->all();      
+    public function saveUserPost(Request $request) {
+        $user_id = auth()->user()->id;
+        $data = $request->all();
         DB::table('assigned_tasks')->insert(
             ['assigned_tasks.tasks_id' => $data['task_id'], 'assigned_tasks.users_id' => $data['id']]
         );
         DB::table('tasks')
             ->where('id', $data['task_id'])
-            ->update(['assigned_by' => $data['id']]);
+            ->update(['assigned_by' => $user_id]);
+        $this->index();    
         return back();
     }
 }

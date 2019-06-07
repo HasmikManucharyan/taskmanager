@@ -25,17 +25,17 @@ $( document ).ready(function() {
            url:'/getUsers',
            success:function(data){
             var txt = '';
-              for(i=1;i<data.length;i++) {
+              for(i=0;i<data.length;i++) {
                 txt += '<option value="'+data[i]['id']+'">'+data[i]['name']+'</option>';
               }
-              $('#selectedUser').append(txt);
+              $('#selectedUser').html(txt);
            }
       });
     })
 
     $('#saveSelectedUser').click(function() {
       var id = $('#selectedUser').val();
-      var task_id = $('#hidden').val();
+      var task_id = $('#hidden').val();      
       $.ajax({
            type:'POST',
            url:'/saveUser',
