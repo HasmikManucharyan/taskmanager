@@ -59,11 +59,37 @@ class HomeController extends Controller
         return redirect()->route('home');
     }
 
+    public function changePriorityPost(Request $request)
+    {        
+        $data = $request->all();
+        DB::table('tasks')
+            ->where('id', $data['id'])
+            ->update(['priority' => $data['priority']]);
+        return redirect()->route('home');
+    }
+
     public function addTaskPost(Request $request) {
         $data = $request->all();
-        DB::table('tasks')->insert(
-            ['title' => $data['title'], 'deadline' => $data['deadline']]
-        );
+        if(!empty($data['title'])){
+            $files = $request->file('image');
+            if(!empty($files)){
+                $imgArr = [];
+                foreach ($files as $file) {
+                    $this->validate($request, [
+                        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    ]);
+
+                    $imageName = $file->getClientOriginalName();
+                    $imgArr[] = $imageName;
+                    $file->move(public_path('images'), $imageName);
+                }
+            }
+                DB::table('tasks')->insert(
+                    ['title' => $data['title'], 'deadline' => $data['deadline'], 'description' => $data['description'], 'priority' => $data['priority'], 'img' => json_encode($imgArr)]
+                );
+                return back();
+
+        }
         return back();
     }
 

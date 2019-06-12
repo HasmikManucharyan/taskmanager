@@ -13,10 +13,7 @@ class UpdateUsersTable extends Migration
      */
     public function up()
     {   
-        Schema::table('users', function (Blueprint $table) {
-            if (Schema::hasColumn('users', 'email_verified_at') || Schema::hasColumn('users', 'created_at') || Schema::hasColumn('users', 'updated_at')) {
-                $table->dropColumn(['email_verified_at','created_at','updated_at']);
-            }
+        Schema::table('users', function (Blueprint $table) {            
             if(!Schema::hasColumn('users','type')) {
                 $table->string('type',20)->default('developer');
             }

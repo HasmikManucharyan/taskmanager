@@ -4,7 +4,23 @@ $( document ).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
 
+    });    
+
+    $('.priority').change(function() {
+      var priority = {low:'#F7FF05', medium:'#FFCC00', high:'#FF8D0A', critical:'#FF5405', hotfix:'#FF1D19'};
+      var color = $(this).val();
+      $(this).css( "background-color",priority[color]);
+      var priority = $(this).val();
+      var taskid = $(this).parent().parent().find('.task_id').html();
+      $.ajax({
+           type:'POST',
+           url:'/changePriority',
+           data:{id:taskid, priority:priority},
+           success:function(data){
+           }
+      });
     });
+
     $('#select_status').change(function() {
     	var taskid = $(this).parent().parent().find('.task_id').html();
     	var status = $(this).val();
@@ -50,4 +66,23 @@ $( document ).ready(function() {
            }
       });
     })
+
+    function readURL(input) {
+      if (input.files) {
+        for(var i=0; i<input.files.length;i++){
+          var reader = new FileReader();
+          
+          reader.onload = function(e) {
+            $('.uploadedImages').append('<img class="newUploadedImage" src="'+e.target.result+'" />')
+          }
+          
+          reader.readAsDataURL(input.files[i]);
+        }
+      }
+    }
+
+    $("#image").change(function() {
+      $('.uploadedImages').html('');
+      readURL(this);
+    });
 })

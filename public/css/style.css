@@ -52,3 +52,14 @@ html, body {
 #addTask {
     margin-top: 10px;
 }
+
+.taskImg {
+    width: 450px;
+    height: auto;
+}
+
+.newUploadedImage {
+    width: 250px;
+    height: auto;
+    margin: 10px 50px 25px 100px;
+}
